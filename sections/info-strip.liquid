@@ -1,0 +1,265 @@
+{% comment %}
+  Franja Decorativa de Información - ToyPride
+  
+  Una franja llamativa con íconos de beneficios
+  que va justo después del slider para romper el blanco
+  
+  Uso: Agregar después del slider en la página de inicio
+{% endcomment %}
+
+<style>
+  .info-strip-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_mobile }}px 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    z-index: 5;
+  }
+
+  @media (min-width: 768px) {
+    .info-strip-{{ section.id }} {
+      padding: {{ section.settings.padding_desktop }}px 0;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+  }
+
+  /* Pattern animado de fondo */
+  {% if section.settings.show_pattern %}
+  .info-strip-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.05) 10px,
+      rgba(255, 255, 255, 0.05) 20px
+    );
+    animation: stripMove 20s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes stripMove {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(50px, 50px);
+    }
+  }
+  {% endif %}
+
+  .info-strip-{{ section.id }} .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .info-strip-{{ section.id }} .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 768px) {
+    .info-strip-{{ section.id }} .content {
+      gap: 50px;
+    }
+  }
+
+  .info-strip-{{ section.id }} .item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .info-strip-{{ section.id }} .item:hover {
+    transform: scale(1.05);
+  }
+
+  .info-strip-{{ section.id }} .icon {
+    font-size: 20px;
+    display: inline-block;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @media (min-width: 768px) {
+    .info-strip-{{ section.id }} .icon {
+      font-size: 24px;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Stagger animation para cada item */
+  .info-strip-{{ section.id }} .item:nth-child(1) .icon {
+    animation-delay: 0s;
+  }
+
+  .info-strip-{{ section.id }} .item:nth-child(2) .icon {
+    animation-delay: 0.2s;
+  }
+
+  .info-strip-{{ section.id }} .item:nth-child(3) .icon {
+    animation-delay: 0.4s;
+  }
+
+  .info-strip-{{ section.id }} .item:nth-child(4) .icon {
+    animation-delay: 0.6s;
+  }
+</style>
+
+<div class="info-strip-{{ section.id }}">
+  <div class="container">
+    <div class="content">
+      {% for block in section.blocks %}
+        <div class="item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <span class="icon">{{ block.settings.icon }}</span>
+          {%- endif -%}
+          <span class="text">{{ block.settings.text }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "🔥 Franja Informativa",
+  "tag": "section",
+  "class": "section-info-strip",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_color",
+      "label": "Fondo",
+      "default": "linear-gradient(135deg, #FF0000 0%, #FFD700 100%)"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding móvil",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding desktop",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Efectos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pattern",
+      "label": "Mostrar pattern animado de fondo",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji/Ícono",
+          "default": "🔥",
+          "info": "Usa emojis: 🔥 ⚡ 🚚 💰 🏁 ✅ 🎁"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Envíos a todo México"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "🔥 Franja Informativa",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon": "🚚",
+            "text": "Envíos a todo México"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "🔥",
+            "text": "Modelos exclusivos"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "✅",
+            "text": "100% originales"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "💰",
+            "text": "Mejores precios"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

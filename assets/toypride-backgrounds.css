@@ -1,0 +1,456 @@
+/* ============================================
+   TOYPRIDE - PATTERN DE FONDO Y SECCIONES
+   ============================================
+   
+   Este archivo agrega:
+   1. Pattern sutil de dots cómic en el fondo general
+   2. Secciones alternadas con fondos diferentes
+   3. Mantiene productos sobre fondo blanco
+   
+   Instalación:
+   - Copia este código en theme.css o en un snippet
+   - O agrégalo en "Edit code" > Assets > theme.css
+============================================ */
+
+/* ====================================
+   1. PATTERN DE FONDO GENERAL (BODY)
+   ==================================== */
+
+body {
+  /* Pattern de dots tipo cómic con colores ToyPride */
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(65, 105, 225, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.01) 10px,
+      rgba(0, 0, 0, 0.01) 20px
+    );
+  background-size: 400px 400px, 600px 600px, 300px 300px, 40px 40px;
+  background-position: 0 0, 200px 200px, 100px 100px, 0 0;
+  animation: bgMove 30s linear infinite alternate;
+}
+
+@keyframes bgMove {
+  from { background-position: 0 0, 200px 200px, 100px 100px, 0 0; }
+  to { background-position: 50px 50px, 250px 250px, 150px 150px, 20px 20px; }
+}
+
+/* Alternativa: Pattern de dots más simple */
+.body-dots-pattern {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(circle, rgba(255, 215, 0, 0.06) 1px, transparent 1px),
+    radial-gradient(circle, rgba(65, 105, 225, 0.06) 1px, transparent 1px);
+  background-size: 30px 30px, 50px 50px;
+  background-position: 0 0, 25px 25px;
+}
+
+/* Alternativa: Pattern de líneas cómic */
+.body-comic-lines {
+  background-color: #ffffff;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 15px,
+      rgba(255, 215, 0, 0.03) 15px,
+      rgba(255, 215, 0, 0.03) 16px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 15px,
+      rgba(65, 105, 225, 0.03) 15px,
+      rgba(65, 105, 225, 0.03) 16px
+    );
+}
+
+/* ====================================
+   2. SECCIONES ALTERNADAS
+   ==================================== */
+
+/* Todas las secciones tienen padding consistente */
+.section {
+  padding: 60px 0;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 40px 0;
+  }
+}
+
+/* Sección con fondo blanco puro (para productos) */
+.section--white,
+.collection-section,
+.product-grid-section {
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sección con fondo gris muy claro */
+.section--light-gray {
+  background-color: #f8f8f8;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sección con fondo amarillo muy claro (para ofertas) */
+.section--light-yellow {
+  background-color: #FFF9E6;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sección con fondo azul muy claro */
+.section--light-blue {
+  background-color: #F0F4FF;
+  position: relative;
+  z-index: 1;
+}
+
+/* ====================================
+   3. ESTILOS ESPECÍFICOS PARA SHOPIFY
+   ==================================== */
+
+/* Si usas el tema Spotlight o Dawn */
+.shopify-section {
+  position: relative;
+}
+
+/* Alternar fondos automáticamente */
+.shopify-section:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.shopify-section:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+/* El slider siempre sin fondo (usa su propia imagen) */
+.shopify-section:first-child,
+.section-hero-slider,
+.section-hero-slider-premium {
+  background-color: transparent !important;
+}
+
+/* ====================================
+   4. CONTENEDORES DE PRODUCTOS
+   ==================================== */
+
+/* Los productos siempre sobre fondo blanco */
+.product-card,
+.product-item,
+.card,
+.card-wrapper {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover,
+.product-item:hover,
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ====================================
+   5. HEADERS DE SECCIÓN
+   ==================================== */
+
+/* Títulos de sección con estilo ToyPride */
+.section-header,
+.collection-header h2,
+h2.title {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Línea decorativa bajo títulos */
+.section-header::after,
+.collection-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #FF0000 0%, #FFD700 100%);
+  border-radius: 2px;
+}
+
+/* ====================================
+   6. FRANJA DECORATIVA (OPCIONAL)
+   ==================================== */
+
+/* Franja de información después del slider */
+.info-strip {
+  background: linear-gradient(135deg, #FF0000 0%, #FFD700 100%);
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-strip::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 20px
+  );
+  animation: stripMove 20s linear infinite;
+}
+
+@keyframes stripMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+.info-strip-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.info-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 767px) {
+  .info-strip {
+    font-size: 14px;
+    padding: 15px 0;
+  }
+  
+  .info-strip-content {
+    gap: 20px;
+  }
+}
+/* ====================================
+   7. FOOTER MEJORADO TOYPRIDE
+   ==================================== */
+
+footer,
+.footer {
+  background-color: #111111; /* Negro más profundo */
+  color: #f0f0f0; /* Texto principal más claro */
+  position: relative;
+  z-index: 2;
+  padding: 60px 0 30px 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Separador superior tipo cómic */
+footer::before,
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #FF0000, #FFD700, #4169E1);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+/* Enlaces del footer */
+footer a,
+.footer a {
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+footer a:hover,
+.footer a:focus {
+  color: #FFD700; /* Dorado brillante */
+  transform: scale(1.05);
+}
+
+/* Títulos dentro del footer */
+.footer h2,
+.footer h3,
+footer h2,
+footer h3 {
+  color: #ffffff;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Iconos o enlaces sociales */
+.footer__social,
+footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.footer__social a svg,
+footer .social-icons a svg {
+  width: 24px;
+  height: 24px;
+  fill: #f0f0f0;
+  transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.footer__social a:hover svg,
+footer .social-icons a:hover svg {
+  fill: #FFD700;
+  transform: scale(1.2);
+}
+
+/* Texto inferior (copyright, links legales) */
+.footer__bottom,
+footer .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 30px;
+  padding-top: 20px;
+  font-size: 14px;
+  color: #bbbbbb;
+  text-align: center;
+}
+
+/* Pequeño brillo en hover */
+footer:hover {
+  box-shadow: 0 -2px 10px rgba(255, 215, 0, 0.1);
+}
+
+/* Adaptación móvil */
+@media (max-width: 767px) {
+  footer,
+  .footer {
+    padding: 40px 0 20px 0;
+    text-align: center;
+  }
+  .footer__social {
+    flex-direction: row;
+    gap: 15px;
+  }
+  .footer h2,
+  .footer h3 {
+    font-size: 16px;
+  }
+}
+
+
+/* ====================================
+   8. AJUSTES PARA MÓVIL
+   ==================================== */
+
+@media (max-width: 767px) {
+  /* Pattern más sutil en móvil */
+  body {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(65, 105, 225, 0.04) 0%, transparent 50%);
+    background-size: 200px 200px, 300px 300px;
+  }
+}
+
+/* ====================================
+   9. ANIMACIONES SUAVES
+   ==================================== */
+
+/* Fade in para secciones al hacer scroll */
+.section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================================
+   10. UTILIDADES
+   ==================================== */
+
+/* Clase para centrar contenido */
+.section-centered {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Espaciado entre secciones */
+.section + .section {
+  margin-top: 0;
+}
+
+/* Remover padding top de primera sección después del slider */
+.shopify-section:first-child + .shopify-section .section {
+  padding-top: 80px;
+}
+
+@media (max-width: 767px) {
+  .shopify-section:first-child + .shopify-section .section {
+    padding-top: 60px;
+  }
+}
+
+/* ====================================
+   NOTAS DE USO:
+   
+   Para activar diferentes patterns en body, agrega 
+   una de estas clases al tag <body>:
+   
+   - Sin clase adicional = Pattern por defecto (dots + gradientes)
+   - class="body-dots-pattern" = Solo dots simples
+   - class="body-comic-lines" = Líneas tipo cómic
+   
+   Para las secciones, agrega las clases en Shopify:
+   
+   - class="section section--white" = Fondo blanco
+   - class="section section--light-gray" = Fondo gris claro
+   - class="section section--light-yellow" = Fondo amarillo claro
+   ==================================== */

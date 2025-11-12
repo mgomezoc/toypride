@@ -1,0 +1,145 @@
+{% schema %}
+{
+  "name": "Beneficios ToyPride",
+  "tag": "section",
+  "class": "section feature-grid-toypride-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "✨ Por qué comprar en ToyPride"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "<p>Beneficios que hacen de nuestra tienda tu mejor opción</p>"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Color de fondo",
+      "default": "#002bff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji/Icono",
+          "default": "🚚"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Envíos a todo México"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Recibe tus productos en cualquier parte del país."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Beneficios ToyPride",
+      "category": "Secciones personalizadas",
+      "blocks": [
+        {"type": "benefit"},
+        {"type": "benefit"},
+        {"type": "benefit"},
+        {"type": "benefit"}
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.feature-grid-toypride-section {
+  background: var(--bg, #002bff);
+  color: var(--color, #fff);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.feature-grid-toypride-section h2 {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.feature-grid-toypride-section .subheading {
+  font-size: 16px;
+  margin-bottom: 32px;
+  opacity: 0.9;
+}
+
+.feature-grid-toypride {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-grid-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.feature-grid-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.feature-grid-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.feature-grid-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.feature-grid-description {
+  font-size: 14px;
+  opacity: 0.9;
+}
+</style>
+
+<div class="feature-grid-toypride-section" style="--bg: {{ section.settings.background }}; --color: {{ section.settings.text_color }}">
+  <h2>{{ section.settings.heading }}</h2>
+  <div class="subheading">{{ section.settings.subheading }}</div>
+  <div class="feature-grid-toypride">
+    {% for block in section.blocks %}
+      <div class="feature-grid-item">
+        <div class="feature-grid-icon">{{ block.settings.icon }}</div>
+        <div class="feature-grid-title">{{ block.settings.title }}</div>
+        <div class="feature-grid-description">{{ block.settings.description }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

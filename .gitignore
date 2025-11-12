@@ -1,0 +1,39 @@
+# Archivos temporales / del sistema
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Archivos de configuración personal de editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Node / paquetes (si usas herramientas como Shopify CLI 3.x, Tailwind, Webpack, etc.)
+node_modules/
+dist/
+build/
+.env
+.env.*         # Archivos de entorno como .env.local, .env.production
+
+# Salidas de Shopify CLI
+.shopify/
+*.zip          # En caso de que exportes el tema como ZIP
+
+# Archivos relacionados con dependencias de Ruby o bundler (si aplica)
+.bundle/
+vendor/
+Gemfile.lock
+
+# Archivos de backup automáticos de algunos editores
+*~
+*.bak
+*.old
+
+# Ignorar archivos de Shopify Theme Kit (opcional, si no usas)
+config.yml
+
+# Archivos de caché comunes
+.cache/
